@@ -42,6 +42,10 @@ void Vector::push(int32_t value) {
   size++;
 }
 
+void Vector::display() {
+  std::cout << *this << std::endl;
+}
+
 Vector& Vector::operator=(const Vector& other) {
   if (this!=&other)
   {
@@ -59,19 +63,52 @@ const int32_t& Vector::operator[] (size_t i) const {
   return vector[i];
 }
 
-std::ostream& operator<<(std::ostream &os, const Vector& v){
-    for(unsigned i = 0; i < v.getSize(); i++){
-        os << v.getData()[i] << " ";
-    }
+void Vector::operator+=(const Vector& other) {
+  for(size_t i = 0; i < this->getSize(); i++)
+    this->operator[](i) += other[i];
+}
 
-    return os;
+Vector operator+(Vector copy, const Vector& other)
+{
+  copy += other;
+  return copy;
+}
+
+
+void Vector::operator-=(const Vector& other) {
+  for(size_t i = 0; i < this->getSize(); i++)
+    this->operator[](i) -= other[i];
+}
+
+Vector operator-(Vector copy, const Vector& other)
+{
+  copy -= other;
+  return copy;
+}
+
+void Vector::operator*=(const Vector& other) {
+  for(size_t i = 0; i < this->getSize(); i++)
+    this->operator[](i) *= other[i];
+}
+
+Vector operator*(Vector copy, const Vector& other)
+{
+  copy *= other;
+  return copy;
+}
+
+std::ostream& operator<<(std::ostream &os, const Vector& v){
+  for(unsigned i = 0; i < v.getSize(); i++)
+    os << v.getData()[i] << " ";
+
+  return os;
 }
 
 std::istream& operator>>(std::istream& is, Vector& v) {
-    int32_t value;
-  
-    is >> value;
-    v.push(value);
+  int32_t value;
 
-    return is;
+  is >> value;
+  v.push(value);
+
+  return is;
 }

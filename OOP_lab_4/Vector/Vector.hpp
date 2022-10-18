@@ -19,23 +19,33 @@ private:
 
 public:
   Vector();
-  Vector(size_t n);
-  Vector(std::vector<int32_t>);
-  Vector(const Vector &v);
+  Vector(size_t s);
+  Vector(std::vector<int32_t> v);
+  Vector(const Vector& v);
   ~Vector();
 
   size_t getSize() const;
   std::vector<int32_t> getData() const;
-  
+
   void push(int32_t value);
   void display();
-  
+
   Vector& operator=(const Vector& other);
-  int32_t& operator[] (size_t i);
-  const int32_t& operator[] (size_t i) const;
+  int32_t& operator[] (size_t s);
+  const int32_t& operator[] (size_t s) const;
 
   friend std::istream& operator>>(std::istream& is, Vector& v);
-  friend std::ostream& operator<<(std::ostream &os, const Vector& v);
+  friend std::ostream& operator<<(std::ostream &os, const Vector& );
+  
+  void operator+=(const Vector& other);
+  friend Vector operator+(Vector copy, const Vector& other);
+  
+  void operator-=(const Vector& other);
+  friend Vector operator-(Vector copy, const Vector& other);
+  
+  void operator*=(const Vector& other);
+  friend Vector operator*(Vector copy, const Vector& other);
+  
 };
 
 
